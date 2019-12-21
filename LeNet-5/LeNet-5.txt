@@ -1,0 +1,20 @@
+// input和output必须在最开始和最后
+// input和output的顺序和forward中vector的顺序相同
+
+// 注意目前逗号后不能有空格
+// options(1,6,3,1,0,1)不能写成options(1, 6, 3, 1, 0, 1)
+
+0  pre()   next(1)  name(input)
+1  pre(0)  next(2)  name(conv)    options(1,6,3,1,0,1)  parameters(0,1)
+2  pre(1)  next(3)  name(relu)
+3  pre(2)  next(4)  name(maxpool) options(2)
+4  pre(3)  next(5)  name(conv)    options(6,16,3,1,0,1) parameters(2,3)
+5  pre(4)  next(6)  name(relu)
+6  pre(5)  next(7)  name(maxpool) options(2)
+7  pre(6)  next(8)  name(reshape) options(400)
+8  pre(7)  next(9)  name(linear)  options(400,120,1)    parameters(4,5)
+9  pre(8)  next(10) name(relu)
+10 pre(9)  next(11) name(linear)  options(120,84,1)     parameters(6,7)
+11 pre(10) next(12) name(relu)
+12 pre(11) next(13) name(linear)  options(84,10,1)      parameters(8,9)
+13 pre(12) next()   name(output)
