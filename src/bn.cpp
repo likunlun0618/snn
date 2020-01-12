@@ -127,3 +127,18 @@ int BatchNorm::load(float *data, int size, int index)
 
     return 0;
 }
+
+float* BatchNorm::ptrk() const
+{
+    return weight.data;
+}
+
+float* BatchNorm::ptrb() const
+{
+    return bias.data;
+}
+
+int BatchNorm::size() const
+{
+    return c;
+}

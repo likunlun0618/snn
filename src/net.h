@@ -23,6 +23,7 @@ public:
     vector<int> pre;
     vector<int> next;
     vector<int> parameter;
+    string name;
 
     // 将p设置为NULL
     Node();
@@ -31,7 +32,7 @@ public:
     ~Node();
 
     void set(Module *_p, vector<int> _parameter, \
-             vector<int> _pre, vector<int> _next);
+             vector<int> _pre, vector<int> _next, string _name);
 };
 
 /*
@@ -56,6 +57,8 @@ public:
     // 计算图中所有没有后继的节点，都是输出节点
     // 有多个输出时，它们的顺序和图中节点编号从小到大对应
     int forward(const std::vector<Tensor> &inp, std::vector<Tensor> &out);
+
+    void mergeConvBN();
 
 //private:
 public:

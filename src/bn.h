@@ -16,6 +16,11 @@ public:
 
     int load(float *data, int size, int index);
 
+    // 用于融合卷积和BN的接口
+    float* ptrk() const;
+    float* ptrb() const;
+    int size() const;
+
 private:
     float *mean;
     float *var;

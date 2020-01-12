@@ -1,17 +1,10 @@
-#include <sys/timeb.h>
 #include <iostream>
 #include <sstream>
 #include <cblas.h>
 #include <cstdlib>
 #include "convolution.h"
-#include "global.h"
-
-static long system_time()
-{
-    timeb t;
-    ftime(&t);
-    return t.time * 1000 + t.millitm;
-}
+//#include "global.h"
+//#include "time.h"
 
 Module* createConvolution(std::string options)
 {
@@ -46,6 +39,8 @@ Tensor Convolution::forward(const std::vector<Tensor> &inp)
 {
     long t1, t2;
 
+    // t1 = time();
+
     if (inp[0].c != weight.c)
     {
         ; // 输入和weight的channel不符
@@ -57,9 +52,7 @@ Tensor Convolution::forward(const std::vector<Tensor> &inp)
     int outw = (inp[0].w + 2*p - weight.w + s) / s;
 
     // 向storage申请了足量的内存
-    // t1 = system_time();
     Tensor out(1, weight.n, outh, outw);
-    // t2 = system_time();
 
     // t1 = system_time();
     // 当bias为空Tensor的时候，bias.data为NULL
@@ -67,14 +60,13 @@ Tensor Convolution::forward(const std::vector<Tensor> &inp)
         inp[0].data, weight.data, out.data, bias.data, \
         weight.c, inp[0].h, inp[0].w, weight.n, weight.h, s, p \
     );
-    // t2 = system_time();
-    // std::cout << t2 - t1 << std::endl;
-    // while (true);
+
+    // t2 = time();
     /*
-    if (global == 1 && global_module == 1)
+    if (global == 1 && global_module == 9)
     {
-        std::cout << "allocate: " << t2 - t1 << std::endl;
-        while (true);
+        std::cout << weight.h << "," << s << "," << p << std::endl;
+        std::cout << t2 - t1 << std::endl;
     }
     //*/
     return out;
@@ -115,6 +107,9 @@ int Convolution::load(float *data, int size, int index)
 int Convolution::_convolution(float *inp, float *weight, float *out, float *bias, \
                               int c, int h, int w, int n, int k, int s, int p)
 {
+    //long t1 ,t2;
+    //t1 = time();
+
     int outh = (h + 2*p - k + s) / s;
     int outw = (w + 2*p - k + s) / s;
 
@@ -129,6 +124,8 @@ int Convolution::_convolution(float *inp, float *weight, float *out, float *bias
         tmp = new float[c * k * k * outh * outw];
         _im2col(inp, tmp, c, h, w, k, s, p);
     }
+
+    //t2 = time();
 
     // 偏置相关
     float beta;
@@ -145,6 +142,8 @@ int Convolution::_convolution(float *inp, float *weight, float *out, float *bias
     else
         beta = 0.;
 
+    
+
     cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, n, outh*outw, c*k*k, 1., \
                 weight, c*k*k, tmp, outh*outw, beta, out, outh*outw);
 
@@ -152,6 +151,15 @@ int Convolution::_convolution(float *inp, float *weight, float *out, float *bias
         return 0;
 
     delete [] tmp;
+
+    /*
+    if (global == 1 && global_module == 31)
+    {
+        std::cout << k << "," << s << "," << p << std::endl;
+        std::cout << t2 - t1 << "us" << std::endl;
+    }
+    */
+
     return 0;
 }
 

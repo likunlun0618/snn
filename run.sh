@@ -5,6 +5,7 @@ cd src
 g++ hg_test.cpp net.cpp parse.cpp module.cpp tensor.cpp storage.cpp image.cpp \
 convolution.cpp relu.cpp maxpool.cpp reshape.cpp linear.cpp upsample.cpp bn.cpp \
 addition.cpp \
+time.cpp \
 -I ~/open_source_projects/OpenBLAS-openmp-install/include \
 -I /usr/local/include/opencv4 \
 ~/open_source_projects/OpenBLAS-openmp-install/lib/libopenblas.a \

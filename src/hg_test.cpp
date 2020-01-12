@@ -1,23 +1,18 @@
 #include <iostream>
 #include <vector>
-#include <sys/timeb.h>
 #include <cstdlib>
 #include <cmath>
 #include "storage.h"
 #include "net.h"
+#include "time.h"
 #include "global.h"
 
 int global = 0;
 int global_module = 0;
 
-using namespace std;
+long var1 = 0;
 
-long system_time()
-{
-    timeb t;
-    ftime(&t);
-    return t.time * 1000 + t.millitm;
-}
+using namespace std;
 
 int main(int argc, char *argv[])
 {
@@ -30,6 +25,9 @@ int main(int argc, char *argv[])
     // 构建网络模型
     Net net(argv[1]);
     net.load(argv[2]);
+
+    // 合并可以合并的卷积和BN
+    // net.mergeConvBN();
 
     // 准备输入和输出
     Tensor img(1, 3, 256, 256);
@@ -58,9 +56,9 @@ int main(int argc, char *argv[])
     global = 1;
     // 前向传播
     long t1, t2;
-    t1 = system_time();
+    t1 = time();
     net.forward(inp, out);
-    t2 = system_time();
+    t2 = time();
 
     // 和pytorch版本的结果做对比
     Tensor output(1, out[0].c, out[0].h, out[0].w);
@@ -72,7 +70,7 @@ int main(int argc, char *argv[])
     cout << "average error:" << s << endl;
 
     // 打印时间
-    cout << "time:" << t2 - t1 << "ms" << endl;
+    cout << "time:" << t2 - t1 << "us" << endl;
 
     // 打印storage的信息
     cout << "storage info:" << endl;

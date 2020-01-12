@@ -41,7 +41,8 @@
 31 pre(30)    next(32)     name(conv)    options(128,128,3,1,1,1)  parameters(54,55)
 32 pre(31)    next(33)     name(bn)      options(128,1e-5)         parameters(56,57,58,59)
 33 pre(32)    next(34)     name(relu)
-34 pre(33)    next(35)     name(conv)    options(128,256,1,1,0,1)  parameters(60,61)
+// 34号节点的next之前写错了
+34 pre(33)    next(36)     name(conv)    options(128,256,1,1,0,1)  parameters(60,61)
 35 pre(25)    next(36)     name(conv)    options(128,256,1,1,0,1)  parameters(62,63)
 36 pre(34,35) next(37,168,177,195)     name(add)
 

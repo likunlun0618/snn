@@ -33,7 +33,7 @@ ModuleFactory::ModuleFactory()
     registerModule("add", createAddition);
 }
 
-// 注意如果有同名的Module，后注册的不会覆盖先注册的，而是会返回错误代码
+// 注意如果有同名的Module，后注册的不会覆盖先注册的，而是返回错误代码
 int ModuleFactory::registerModule(std::string name, Module* (*pfunc)(std::string))
 {
     if (table.find(name) != table.end())

@@ -1,18 +1,10 @@
 #include <iostream>
 using std::cout;
 using std::endl;
-#include <sys/timeb.h>
 #include <fstream>
 #include "tensor.h"
 #include "storage.h"
 #include "global.h"
-
-static long system_time()
-{
-    timeb t;
-    ftime(&t);
-    return t.time * 1000 + t.millitm;
-}
 
 Tensor::Tensor(int _c, int _h, int _w): data(NULL), ref(NULL)
 {
@@ -89,7 +81,7 @@ int Tensor::resize(int _c, int _h, int _w)
 int Tensor::resize(int _n, int _c, int _h, int _w)
 {
     // long t1, t2;
-    // t1 = system_time();
+    // t1 = time();
 
     int size = _n * _c * _h * _w;
     if (size > 0)
@@ -109,7 +101,7 @@ int Tensor::resize(int _n, int _c, int _h, int _w)
         return -1;
     }
 
-    // t2 = system_time();
+    // t2 = time();
 
     /* 用均匀分布给data赋值，便于debug
     for (int i = 0; i < size; ++i)

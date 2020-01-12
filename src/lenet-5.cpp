@@ -1,24 +1,17 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include <sys/timeb.h>
 #include "tensor.h"
 #include "net.h"
 #include "storage.h"
 #include "image.h"
+#include "time.h"
 #include "global.h"
 
 int global = 0;
 int global_module = 0;
 
 using namespace std;
-
-long system_time()
-{
-    timeb t;
-    ftime(&t);
-    return t.time * 1000 + t.millitm;
-}
 
 void printVector(vector<int> &v)
 {

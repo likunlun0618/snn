@@ -1,4 +1,3 @@
-#include <sys/timeb.h>
 #include <cstring>
 #include <iostream>
 #include <fstream>
@@ -7,13 +6,9 @@
 #include "parse.h"
 #include "storage.h"
 #include "global.h"
-
-static long system_time()
-{
-    timeb t;
-    ftime(&t);
-    return t.time * 1000 + t.millitm;
-}
+#include "convolution.h"
+#include "bn.h"
+#include "time.h"
 
 Node::Node(): p(NULL) {}
 
@@ -24,12 +19,13 @@ Node::~Node()
 }
 
 void Node::set(Module *_p, vector<int> _parameter, \
-               vector<int> _pre, vector<int> _next)
+               vector<int> _pre, vector<int> _next, string _name)
 {
     p = _p;
     parameter = _parameter;
     pre = _pre;
     next = _next;
+    name = _name;
 }
 
 // Net的构造函数里的处理步骤
@@ -69,7 +65,7 @@ Net::Net(string filename): num_input(0), num_output(0), node(NULL)
         else
             name == "input" ? ++num_input : ++num_output;
 
-        node[id].set(p, parameter, pre, next);
+        node[id].set(p, parameter, pre, next, name);
     }
 
     // 拓扑排序，找到节点的计算依赖关系
@@ -163,13 +159,15 @@ int Net::parse(string &line, int &id, vector<int> &pre, vector<int> &next,
 int Net::topologicalSort()
 {
     // 拓扑排序
+    order.clear();
     vector<int> mark(num_modules, 0);
     for (int i = 0; i < num_modules; ++i)
-        if (visit(i, mark))
+        if ((node[i].pre.size() > 0 || node[i].next.size() > 0) && visit(i, mark))
             return -1; // 有环
 
     // 经历过拓扑排序之后，order中应该已经排好了数据
     // 根据order计算释放节点的顺序
+    free_order.clear();
     free_order.resize(num_modules);
     vector<bool> visited(num_modules, false);
     for (int i = 0; i < num_input; ++i)
@@ -241,8 +239,7 @@ int Net::forward(const vector<Tensor> &inp, vector<Tensor> &out)
     // 默认inp_buffer和out_buffer是干净状态
     for (int i = num_input; i < order.size() - num_output; ++i)
     {
-
-        t1 = system_time();
+        // t1 = time();
 
         int module_id = order[i];
 
@@ -257,9 +254,9 @@ int Net::forward(const vector<Tensor> &inp, vector<Tensor> &out)
         // 所以不论运行几次，都不会发生反复的堆内存申请和释放
         // TODO：检查p是否为空
         // std::cout << module_id << std::endl;
-        // t1 = system_time();
+        // t1 = time();
         buffer[module_id] = node[module_id].p->forward(inp_buffer);
-        // t2 = system_time();
+        // t2 = time();
         /* 这段代码应该是不符合逻辑的，不需要放到next的buffer中去
         // 将输出放到对应的buffer中
         for (int i = 0; i < out_buffer.size(); ++i)
@@ -279,13 +276,14 @@ int Net::forward(const vector<Tensor> &inp, vector<Tensor> &out)
         // auto info = Storage::getInstance().info();
         // std::cout << i << ":" << info[0].size() << "," << info[1].size() << std::endl;
 
-        t2 = system_time();
+        // t2 = time();
         /*
-        if (global == 1 && global_module == 197)
+        if (global == 1)
         {
-            std::cout << "test!" << std::endl;
-            std::cout << t2 - t1 << std::endl;
-            while (true);
+            std::cout << module_id << ": " << t2 - t1 << "us" << std::endl;
+            // while (true);
+            if (node[module_id].name == "add")
+                var1 += (t2 - t1);
         }
         //*/
     }
@@ -306,17 +304,44 @@ int Net::forward(const vector<Tensor> &inp, vector<Tensor> &out)
     return 0;
 }
 
-/*
 void Net::mergeConvBN()
 {
-    // 找到每一组满足融合条件的conv->bn
-    // 将bn的next添加到conv中，将bn的next里的每一个元素的pre里的bn改成conv
-    // 将bn的参数融进conv
-    // 将bn的pre和next都置空
+    // 1.找到每一组满足融合条件的conv->bn
+    // 2.将bn的next添加到conv中，将bn的next里的每一个元素的pre里的bn改成conv
+    // 3.将bn的pre和next都置空
+    // 4.将bn的参数融进conv
+    // 5.释放bn节点
+    for (int i = 0; i < num_modules; ++i)
+    {
+        // 1.
+        if (node[i].name == "conv" && node[i].next.size() == 1 \
+            && node[node[i].next[0]].name == "bn")
+        {
+            // 2.
+            int bn_id = node[i].next[0];
+            node[i].next.pop_back();
+            for (int j : node[bn_id].next)
+            {
+                node[i].next.push_back(j);
+                for (int &k : node[j].pre)
+                    if (k == bn_id)
+                        k = i;
+            }
+            // 3.
+            node[bn_id].pre.clear();
+            node[bn_id].next.clear();
+            // 4.
+            BatchNorm *p = (BatchNorm*)node[bn_id].p;
+            ((Convolution*)(node[i].p))->mergeBN(p->ptrk(), p->ptrb(), p->size());
+            // 5.
+            delete p;
+            node[bn_id].p = NULL;
+        }
+    }
 
     // 重新计算拓扑排序
     // 当一个节点既没有pre也没有next的时候，就跳过它
+    topologicalSort();
 
     // 修改代码，因为此时拓扑排序的结果的长度可能会小于num_modules
 }
-*/
