@@ -15,7 +15,7 @@ file(GLOB SOURCE_LIST "src/*.cpp")
 file(GLOB HEADER_LIST "src/*.h")
 
 # 添加编译选项
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp -O3")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fopenmp -O3")
 
 # 生成动态链接库
 add_library(nn SHARED ${SOURCE_LIST})

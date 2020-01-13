@@ -26,7 +26,7 @@ link_directories(${OPENCV_LIB})
 link_directories(${SNN_LIB})
 
 # 编译选项
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp -O3")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fopenmp -O3")
 
 add_executable(hg hourglass.cpp)
 target_link_libraries(hg libnn-static.a)
