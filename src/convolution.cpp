@@ -6,6 +6,9 @@
 //#include "global.h"
 //#include "time.h"
 
+namespace snn
+{
+
 Module* createConvolution(std::string options)
 {
     // 目前没有做错误处理
@@ -219,3 +222,5 @@ void Convolution::mergeBN(float *k, float *b, int size)
         bias.data[i] = bias.data[i] * k[i] + b[i];
     }
 }
+
+} // namespace snn

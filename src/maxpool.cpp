@@ -1,6 +1,9 @@
 #include <sstream>
 #include "maxpool.h"
 
+namespace snn
+{
+
 Module* createMaxPool(std::string options)
 {
     int stride;
@@ -50,3 +53,5 @@ int MaxPool::parameters() const
 }
 
 //int MaxPool::load(float *data, int size, int index) {}
+
+} // namespace snn

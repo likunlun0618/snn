@@ -3,6 +3,9 @@
 
 #include "module.h"
 
+namespace snn
+{
+
 Module* createBatchNorm(std::string options);
 
 class BatchNorm : public Module
@@ -33,5 +36,7 @@ private:
     int c;
     float eps;
 };
+
+} // namespace snn
 
 #endif // BN_H

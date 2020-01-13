@@ -1,6 +1,9 @@
 #include <sstream>
 #include "upsample.h"
 
+namespace snn
+{
+
 Module* createUpsample(std::string options)
 {
     int scale;
@@ -38,3 +41,5 @@ int Upsample::parameters() const
 {
     return 0;
 }
+
+} // namespace snn

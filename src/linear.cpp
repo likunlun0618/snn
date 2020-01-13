@@ -2,6 +2,9 @@
 #include <cblas.h>
 #include "linear.h"
 
+namespace snn
+{
+
 Module* createLinear(std::string options)
 {
     for (char &ch : options)
@@ -75,3 +78,5 @@ int Linear::load(float *data, int size, int index)
 
     return 0;
 }
+
+} // namespace snn

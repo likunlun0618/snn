@@ -5,6 +5,9 @@
 #include <vector>
 #include <unordered_map>
 
+namespace snn
+{
+
 /*
 1.以Tensor为单元管理内存
 2.只管理Tensor的内存
@@ -63,5 +66,7 @@ private:
     // pair的大小比较为先比较第一个元素，如果相同再比较第二个，所以长度必须放在第一个
     std::set<std::pair<int, float*>> unused;
 };
+
+} // namespace snn
 
 #endif // STORAGE_H

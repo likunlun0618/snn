@@ -3,6 +3,9 @@
 
 #include "module.h"
 
+namespace snn
+{
+
 Module* createReLU(std::string options);
 
 class ReLU : public Module
@@ -19,5 +22,7 @@ public:
     // 对ReLU来说这是个空函数
     // int load(float *data, int size, int index);
 };
+
+} // namespace snn
 
 #endif  // RELU_H

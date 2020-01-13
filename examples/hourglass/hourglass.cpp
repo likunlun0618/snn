@@ -22,7 +22,7 @@ struct Joint
     Joint(int _x, int _y, float _p): x(_x), y(_y), p(_p) {}
 };
 
-std::vector<Joint> computeJoints(Tensor heatmap)
+std::vector<Joint> computeJoints(snn::Tensor heatmap)
 {
     int c = heatmap.c;
     int h = heatmap.h;
@@ -58,7 +58,7 @@ std::vector<Joint> computeJoints(Tensor heatmap)
     return joints;
 }
 
-Tensor readImage(std::string file)
+snn::Tensor readImage(std::string file)
 {
     cv::Mat img = cv::imread(file, cv::IMREAD_UNCHANGED);
     if (!img.data)
@@ -70,7 +70,7 @@ Tensor readImage(std::string file)
     int c = img.channels() > 1 ? 3 : 1;
     int h = img.rows;
     int w = img.cols;
-    Tensor ret(1, c, h, w);
+    snn::Tensor ret(1, c, h, w);
 
     int index = 0;
     int img_c = img.channels();
@@ -97,12 +97,12 @@ int main(int argc, char *argv[])
     }
 
     // 根据传入的参数读取图片
-    Tensor img = readImage(argv[1]);
-    std::vector<Tensor> inp, out;
+    snn::Tensor img = readImage(argv[1]);
+    std::vector<snn::Tensor> inp, out;
     inp.push_back(img);
 
     // 生成网络
-    Net hg(argv[3]);
+    snn::Net hg(argv[3]);
     // 加载网络参数
     hg.load(argv[4]);
 

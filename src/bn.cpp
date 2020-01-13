@@ -4,6 +4,9 @@
 #include <cmath>
 #include "bn.h"
 
+namespace snn
+{
+
 Module* createBatchNorm(std::string options)
 {
     for (char &ch : options)
@@ -142,3 +145,5 @@ int BatchNorm::size() const
 {
     return c;
 }
+
+} // namespace snn

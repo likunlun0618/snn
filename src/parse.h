@@ -4,6 +4,9 @@
 #include <string>
 #include <vector>
 
+namespace snn
+{
+
 namespace parse
 {
 
@@ -18,5 +21,7 @@ vector<int> readArray(string s, string separator);
 string parseItem(string s, string arg);
 
 } // namespace Parse
+
+} // namespace snn
 
 #endif // PARSE_H

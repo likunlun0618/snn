@@ -3,6 +3,9 @@
 
 #include "module.h"
 
+namespace snn
+{
+
 Module* createConvolution(std::string options);
 
 class Convolution : public Module
@@ -47,5 +50,7 @@ private:
     int _convolution(float *inp, float *weight, float*out, float*bias, \
                       int c, int h, int w, int n, int k, int s, int p);  
 };
+
+} // namespace snn
 
 #endif  // CONVOLUTION_H

@@ -3,6 +3,9 @@
 
 #include <string>
 
+namespace snn
+{
+
 /*
 1.Tensor不负责管理内存，用Storage自动管理内存
 2.Tensor的大小是固定的，即两个指针加4个int
@@ -90,5 +93,7 @@ public:
 };
 
 inline Tensor::Tensor(): data(NULL), ref(NULL), n(0), c(0), h(0), w(0) {}
+
+} // namespace snn
 
 #endif // TENSOR_H

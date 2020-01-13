@@ -8,6 +8,9 @@
 #include "bn.h"
 #include "addition.h"
 
+namespace snn
+{
+
 Module::~Module() {}
 
 int Module::load(float *data, int size, int index) {}
@@ -65,3 +68,5 @@ Module* ModuleFactory::create(std::string name)
 {
     return create(name, "");
 }
+
+} // namespace snn

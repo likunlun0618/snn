@@ -6,6 +6,9 @@
 #include <unordered_map>
 #include "tensor.h"
 
+namespace snn
+{
+
 class Module
 {
 public:
@@ -70,5 +73,7 @@ private:
     // 从name到函数指针的映射表
     std::unordered_map<std::string, Module* (*)(std::string)> table;
 };
+
+} // namespace snn
 
 #endif

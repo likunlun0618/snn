@@ -3,6 +3,9 @@
 
 #include "module.h"
 
+namespace snn
+{
+
 Module* createMaxPool(std::string options);
 
 class MaxPool : public Module
@@ -22,5 +25,7 @@ public:
 private:
     int stride;
 };
+
+} // namespace snn
 
 #endif  // MAXPOOL_H

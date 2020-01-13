@@ -3,6 +3,9 @@
 
 #include "module.h"
 
+namespace snn
+{
+
 Module* createLinear(std::string options);
 
 class Linear : public Module
@@ -24,5 +27,7 @@ private:
     int c;
     int n;
 };
+
+} // namespace snn
 
 #endif

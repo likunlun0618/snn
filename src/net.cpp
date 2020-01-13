@@ -10,6 +10,9 @@
 #include "bn.h"
 //#include "time.h"
 
+namespace snn
+{
+
 Node::Node(): p(NULL) {}
 
 Node::~Node()
@@ -345,3 +348,5 @@ void Net::mergeConvBN()
 
     // 修改代码，因为此时拓扑排序的结果的长度可能会小于num_modules
 }
+
+} // namespace snn

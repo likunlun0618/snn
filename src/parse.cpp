@@ -3,6 +3,9 @@
 #include <sstream>
 #include "parse.h"
 
+namespace snn
+{
+
 namespace parse
 {
 
@@ -73,3 +76,5 @@ string parseItem(string item, string arg)
 }
 
 } // namespace parse
+
+} // namespace snn

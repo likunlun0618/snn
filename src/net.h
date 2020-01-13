@@ -8,6 +8,9 @@
 using std::string;
 using std::vector;
 
+namespace snn
+{
+
 /*
 1.Node是表示计算图中的节点的结构。
 2.成员说明：
@@ -113,5 +116,7 @@ public:
     // visited中0表示white，1表示gray，2表示black
     bool visit(int index, vector<int> &visited);
 };
+
+} // namespace snn
 
 #endif // NET_H

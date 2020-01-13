@@ -6,6 +6,9 @@ using std::endl;
 #include "storage.h"
 //#include "global.h"
 
+namespace snn
+{
+
 Tensor::Tensor(int _c, int _h, int _w): data(NULL), ref(NULL)
 {
     resize(1, _c, _h, _w);
@@ -170,3 +173,5 @@ void Tensor::load(float *_data)
     for (int i = n * c * h * w - 1; i >= 0; --i)
         data[i] = _data[i];
 }
+
+} // namespace snn

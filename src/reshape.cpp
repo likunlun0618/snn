@@ -1,6 +1,9 @@
 #include <sstream>
 #include "reshape.h"
 
+namespace snn
+{
+
 Module* createReshape(std::string options)
 {
     int count = 0;
@@ -47,3 +50,5 @@ int Reshape::parameters() const
 }
 
 //int Reshape::load(float *data, int size, int index) {}
+
+} // namespace snn

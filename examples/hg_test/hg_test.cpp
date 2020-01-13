@@ -31,16 +31,16 @@ int main(int argc, char *argv[])
     }
 
     // 构建网络模型
-    Net net(argv[1]);
+    snn::Net net(argv[1]);
     net.load(argv[2]);
 
     // 合并可以合并的卷积和BN
     // net.mergeConvBN();
 
     // 准备输入和输出
-    Tensor img(1, 3, 256, 256);
+    snn::Tensor img(1, 3, 256, 256);
     img.load(argv[3]);
-    vector<Tensor> inp, out;
+    vector<snn::Tensor> inp, out;
     inp.push_back(img);
 
     /*
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
     t2 = time();
 
     // 和pytorch版本的结果做对比
-    Tensor output(1, out[0].c, out[0].h, out[0].w);
+    snn::Tensor output(1, out[0].c, out[0].h, out[0].w);
     output.load(argv[4]);
     float s = 0.;
     for (int i = 0; i < output.c * output.h * output.w; ++i)
@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
 
     // 打印storage的信息
     cout << "storage info:" << endl;
-    auto info = Storage::getInstance().info();
+    auto info = snn::Storage::getInstance().info();
     int total_size = 0;
     for (int item : info[0])
         total_size += item;

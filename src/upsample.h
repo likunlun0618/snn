@@ -3,6 +3,9 @@
 
 #include "module.h"
 
+namespace snn
+{
+
 Module* createUpsample(std::string options);
 
 class Upsample : public Module
@@ -17,5 +20,7 @@ public:
 private:
     int scale;
 };
+
+} // namespace snn
 
 #endif  // UPSAMPLE_H

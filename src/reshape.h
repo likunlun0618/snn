@@ -3,6 +3,9 @@
 
 #include "module.h"
 
+namespace snn
+{
+
 Module* createReshape(std::string options);
 
 class Reshape : public Module
@@ -16,5 +19,7 @@ public:
 private:
     int n, c, h, w;
 };
+
+} // namespace snn
 
 #endif

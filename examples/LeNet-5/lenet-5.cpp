@@ -5,7 +5,7 @@
 #include <tensor.h>
 #include <net.h>
 
-Tensor readImage(std::string file)
+snn::Tensor readImage(std::string file)
 {
     cv::Mat img = cv::imread(file, cv::IMREAD_UNCHANGED);
     if (!img.data)
@@ -17,7 +17,7 @@ Tensor readImage(std::string file)
     int c = img.channels() > 1 ? 3 : 1;
     int h = img.rows;
     int w = img.cols;
-    Tensor ret(1, c, h, w);
+    snn::Tensor ret(1, c, h, w);
 
     int index = 0;
     int img_c = img.channels();
@@ -37,14 +37,14 @@ int main(int argc, char *argv[])
     }
 
     // 创建模型
-    Net net(argv[1]);
+    snn::Net net(argv[1]);
     // 加载参数
     net.load(argv[2]);
 
     // 读取输入图片
-    Tensor img = readImage(argv[3]);
+    snn::Tensor img = readImage(argv[3]);
 
-    vector<Tensor> inp, out;
+    vector<snn::Tensor> inp, out;
     inp.push_back(img);
 
     net.forward(inp, out);

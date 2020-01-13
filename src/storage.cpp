@@ -1,5 +1,8 @@
 #include "storage.h"
 
+namespace snn
+{
+
 Storage& Storage::getInstance()
 {
     static Storage instance(true);
@@ -131,3 +134,5 @@ std::vector<std::vector<int>> Storage::info()
 
     return ret;
 }
+
+} // namespace snn

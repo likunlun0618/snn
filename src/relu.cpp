@@ -1,5 +1,8 @@
 #include "relu.h"
 
+namespace snn
+{
+
 Module* createReLU(std::string options)
 {
     ReLU *relu = new ReLU;
@@ -27,5 +30,7 @@ int ReLU::parameters() const
 {
     return 0;
 }
+
+} // namespace snn
 
 //int ReLU::load(float *data, int size, int index) {}

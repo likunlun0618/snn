@@ -1,6 +1,9 @@
 #include <iostream>
 #include "addition.h"
 
+namespace snn
+{
+
 Module* createAddition(std::string options)
 {
     Addition *add = new Addition;
@@ -52,3 +55,5 @@ int Addition::parameters() const
 {
     return 0;
 }
+
+} // namespace snn
