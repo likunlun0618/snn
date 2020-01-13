@@ -9,4 +9,21 @@
 
 ## LeNet-5
 
-* LeNet-5的模型文件在`./LeNet-5/LeNet-5.txt`，参数文件在`./LeNet-5/LeNet-5.array`。
+* LeNet-5的模型文件在`./LeNet-5/LeNet-5.txt`，参数文件在`./LeNet-5/LeNet-5.array。
+
+
+
+# 编译
+
+* OpenBLAS需要用`USE_OPENMP=1`编译，具体过程见OpenBLAS的`Makefile.rule`
+
+
+
+# 运行
+
+* 运行前需要设置环境变量
+
+  ```bash
+  export OMP_NUM_THREADS=4
+  ```
+
