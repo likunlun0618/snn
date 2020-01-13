@@ -2,17 +2,25 @@
 #include <vector>
 #include <cstdlib>
 #include <cmath>
-#include "storage.h"
-#include "net.h"
-#include "time.h"
-#include "global.h"
+#include <sys/time.h>
+#include <storage.h>
+#include <net.h>
+//#include "time.h"
+//#include "global.h"
 
-int global = 0;
-int global_module = 0;
+//int global = 0;
+//int global_module = 0;
 
-long var1 = 0;
+//long var1 = 0;
 
 using namespace std;
+
+long time()
+{
+    struct timeval t;
+    gettimeofday(&t, 0);
+    return t.tv_sec * 1e6 + t.tv_usec;
+}
 
 int main(int argc, char *argv[])
 {
@@ -53,7 +61,7 @@ int main(int argc, char *argv[])
     net.forward(inp, out);
     out.clear();
     //*/
-    global = 1;
+    //global = 1;
     // 前向传播
     long t1, t2;
     t1 = time();

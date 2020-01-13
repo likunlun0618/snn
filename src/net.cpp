@@ -5,10 +5,10 @@
 #include "net.h"
 #include "parse.h"
 #include "storage.h"
-#include "global.h"
+//#include "global.h"
 #include "convolution.h"
 #include "bn.h"
-#include "time.h"
+//#include "time.h"
 
 Node::Node(): p(NULL) {}
 
@@ -217,7 +217,7 @@ bool Net::visit(int index, vector<int> &visited)
 
 int Net::forward(const vector<Tensor> &inp, vector<Tensor> &out)
 {
-    long t1, t2;
+    //long t1, t2;
     
     // buffer, inp, out在每次运行完之后理应自动恢复到干净状态
     // 后面注释掉这4行代码观察结果是否会错误
@@ -243,7 +243,7 @@ int Net::forward(const vector<Tensor> &inp, vector<Tensor> &out)
 
         int module_id = order[i];
 
-        global_module = module_id;
+        //global_module = module_id;
 
         // 寻找当前节点的前驱节点
         for (int &pre_id : node[module_id].pre)

@@ -4,7 +4,7 @@ using std::endl;
 #include <fstream>
 #include "tensor.h"
 #include "storage.h"
-#include "global.h"
+//#include "global.h"
 
 Tensor::Tensor(int _c, int _h, int _w): data(NULL), ref(NULL)
 {
@@ -126,10 +126,11 @@ void Tensor::save(std::string filename)
     fout.open(filename, std::ofstream::binary);
 
     // 保存维度信息
-    // 第一个4表示Tensor的总维度是4
+    // 第一个1表示总共有1个tensor
+    // 第二个4表示Tensor的总维度是4
     // 后面4个数字依次是对应的维度
-    int head[5] = {4, n, c, h, w};
-    fout.write((char *)head, sizeof(int) * 5);
+    int head[6] = {1, 4, n, c, h, w};
+    fout.write((char *)head, sizeof(int) * 6);
 
     // 保存数值
     int length = n * c * h * w;

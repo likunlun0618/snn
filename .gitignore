@@ -1,6 +1,6 @@
+build/
+a.out
+
 # 模型参数
 *.array
 *.pth
-
-# 可执行文件
-a.out
