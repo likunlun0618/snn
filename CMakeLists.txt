@@ -6,7 +6,7 @@ project(snn)
 set(CMAKE_INSTALL_PREFIX "install")
 
 # 设置OpenBLAS的头文件目录
-set(OPENBLAS_INCLUDE "~/open_source_projects/OpenBLAS-openmp-install/include")
+set(OPENBLAS_INCLUDE "~/open_source_projects/openblas-install/include")
 include_directories(${OPENBLAS_INCLUDE})
 
 # 源代码
