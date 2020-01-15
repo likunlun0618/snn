@@ -1,6 +1,7 @@
 build/
 a.out
 
-# 模型参数
+# 数据
 *.array
 *.pth
+*.npy

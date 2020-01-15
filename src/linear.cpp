@@ -9,7 +9,7 @@ Module* createLinear(std::string options)
 {
     for (char &ch : options)
         ch = ch == ',' ? ' ' : ch;
-    int c, n, b;
+    int c, n, b = 1;
     std::stringstream(options) >> c >> n >> b;
     Linear *linear;
     if (b != 0)

@@ -7,6 +7,7 @@
 #include "upsample.h"
 #include "bn.h"
 #include "addition.h"
+#include "adaptive_avgpool.h"
 
 namespace snn
 {
@@ -34,6 +35,7 @@ ModuleFactory::ModuleFactory()
     registerModule("upsample", createUpsample);
     registerModule("bn", createBatchNorm);
     registerModule("add", createAddition);
+    registerModule("adaptive_avgpool", createAdaptiveAvgPool);
 }
 
 // 注意如果有同名的Module，后注册的不会覆盖先注册的，而是返回错误代码

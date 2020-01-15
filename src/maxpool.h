@@ -11,7 +11,7 @@ Module* createMaxPool(std::string options);
 class MaxPool : public Module
 {
 public:
-    MaxPool(int _stride);
+    MaxPool(int _k, int _s, int _p);
     // 暂时不需要析构函数
     // ~MaxPool();
 
@@ -23,7 +23,7 @@ public:
     //int load(float *data, int size, int index);
 
 private:
-    int stride;
+    int k, s, p;
 };
 
 } // namespace snn

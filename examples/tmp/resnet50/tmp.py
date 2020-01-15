@@ -1,4 +1,6 @@
 import struct
+import numpy as np
+import torch
 
 
 def write_array(p, filename):
@@ -36,3 +38,10 @@ def write_array(p, filename):
 
     with open(filename, 'wb') as f:
         f.write(raw)
+
+
+p = []
+p.append(np.load('tmp_out.npy'))
+
+
+write_array(p, 'tmp_out.array')
