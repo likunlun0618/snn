@@ -84,7 +84,7 @@ SNN是一个CPU端的小型CNN前向传播框架。除了加载网络参数，�
 
 #### resnet50
 
-( 模型参数 : https://pan.baidu.com/s/1DBz8I9eKQZz6gRAjCfhOnQ，提取码 : wp36，放在`examples/resnet50/data`下 )
+( 模型参数 : https://pan.baidu.com/s/1DBz8I9eKQZz6gRAjCfhOnQ , 提取码 : wp36，放在`examples/resnet50/data`下 )
 
 进入`examples/resnet50`下，执行 :
 
@@ -107,7 +107,7 @@ probability: 0.414304
 
 #### hourglass
 
-( 模型参数 : https://pan.baidu.com/s/1KIiag7wo2SuWZ6sQLQEFXg，提取码 : 58sf，放在`examples/hourglass/data`下 )
+( 模型参数 : https://pan.baidu.com/s/1KIiag7wo2SuWZ6sQLQEFXg , 提取码 : 58sf，放在`examples/hourglass/data`下 )
 
 进入`examples/hourglass`下，执行 :
 
@@ -148,7 +148,7 @@ forward time: xxx us
 
 #### LeNet-5
 
-( 模型参数 : https://pan.baidu.com/s/1PFSsqlO8rEkQDS2-ExpqGw，提取码 : wov4，放在`examples/LeNet-5/data`下 )
+( 模型参数 : https://pan.baidu.com/s/1PFSsqlO8rEkQDS2-ExpqGw , 提取码 : wov4，放在`examples/LeNet-5/data`下 )
 
 进入`examples/LeNet-5`下，执行 :
 
