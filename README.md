@@ -144,7 +144,7 @@ forward time: xxx us
 
 同时，在`build`目录下会生成`output.png`，绘制了所有检测出的关节点，如下图 (图片来自网络，侵删):
 
-![](files/output.png)
+![](https://github.com/likunlun0618/snn/blob/master/files/output.png)
 
 #### LeNet-5
 
