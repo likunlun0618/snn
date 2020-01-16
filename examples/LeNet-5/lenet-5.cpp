@@ -48,8 +48,17 @@ int main(int argc, char *argv[])
     inp.push_back(img);
 
     net.forward(inp, out);
+
+    std::cout << "output: " << std::endl;
     for (int i = 0; i < out[0].w; ++i)
-        std::cout << out[0].data[i] << std::endl;
+        std::cout << i << ": " << out[0].data[i] << std::endl;
+
+    // argmax
+    int id = 0;
+    for (int i = 1; i < out[0].w; ++i)
+        if (out[0].data[i] > out[0].data[id])
+            id = i;
+    std::cout << "The number in " << argv[3] << " is " << id << std::endl;
 
     return 0;
 }

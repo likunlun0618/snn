@@ -6,7 +6,7 @@ project(resnet50)
 set(CMake_INSTALL_PREFIX "install")
 
 # 设置OpenBLAS的路径
-set(OPENBLAS_LIB "~/open_source_projects/openblas-install/lib")
+set(OPENBLAS_LIB "/opt/OpenBLAS/lib")
 
 # 设置opencv的路径
 set(OPENCV_INCLUDE "/usr/local/include/opencv4")

@@ -18,6 +18,14 @@ Storage::~Storage()
 
 int Storage::allocate(float *&data, int *&ref, int size)
 {
+    // 申请的内存块大小不能小于等于0
+    if (size <= 0)
+    {
+        data = NULL;
+        ref = NULL;
+        return -1;
+    }
+
     // ==>if：当Storage维护了buffer且存在空闲的内存块的时候，进入if分支
     // ==>else：当需要重新申请内存的时候，进入else分支
     if (maintain && unused.size() > 0)

@@ -1,0 +1,3 @@
+0 pre()  next(1) name(input)
+1 pre(0) next(2) name(pow)  options(2.)
+2 pre(1) next()  name(output)

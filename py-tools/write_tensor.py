@@ -2,10 +2,8 @@ import struct
 
 
 def write_array(p, filename):
-    '''
-    p是numpy数组的list，其中每个numpy数组的维度在1~4之间
-    '''
-
+    """将numpy数组转成SNN可以读取的array"""
+    # p是numpy数组的list，其中每个numpy数组的维度在1~4之间
     # Tensor的个数
     p = p.copy()
     raw = struct.pack('i', len(p))

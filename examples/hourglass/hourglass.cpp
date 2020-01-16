@@ -112,6 +112,7 @@ int main(int argc, char *argv[])
     long t2 = time();
 
     // 从heatmap中计算关节点坐标
+    std::cout << "joint name: (location), p: probability" << std::endl;
     std::vector<Joint> joints = computeJoints(out[0]);
     for (int i = 0; i < joints.size(); ++i)
     {

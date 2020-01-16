@@ -58,6 +58,14 @@ Tensor::~Tensor()
 
 void Tensor::clear()
 {
+    // 如果把这4个赋0放在ref之后，在开启-O3优化的时候会被优化掉
+    // 在某些情况下(例如vector<Tensor>调用clear()时)容易出现非常隐蔽的错误
+    // 所以宁愿不优化这4个数
+    n = 0;
+    c = 0;
+    h = 0;
+    w = 0;
+
     if (data)
     {
         // 此处默认了当data不为NULL的时候，ref也必然不为NULL
@@ -68,10 +76,6 @@ void Tensor::clear()
     }
     data = NULL;
     ref = NULL;
-    n = 0;
-    c = 0;
-    h = 0;
-    w = 0;
 }
 
 int Tensor::resize(int _c, int _h, int _w)
